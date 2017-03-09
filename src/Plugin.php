@@ -1,4 +1,5 @@
 <?php
+
 namespace Miaoxing\Excel;
 
 class Plugin extends \miaoxing\plugin\BasePlugin

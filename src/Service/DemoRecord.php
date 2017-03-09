@@ -4,7 +4,7 @@ namespace Miaoxing\Excel\Service;
 
 use miaoxing\plugin\BaseService;
 
-class ExcelRecord extends BaseService
+class DemoRecord extends BaseService
 {
     public function getName()
     {
