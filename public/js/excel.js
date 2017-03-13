@@ -1,6 +1,9 @@
 define(['jquery-form'], function () {
   var importExcel = {};
 
+  var delayLong = 5000;
+  var delayLonger = 60000;
+
   // 上传文件到服务器
   var submit = $.fn.ajaxSubmit;
   $.fn.uploadFile = function (url, cols, call) {
@@ -11,11 +14,11 @@ define(['jquery-form'], function () {
       url: $.url('admin/excel/uploadAndParseToJson'),
       success: function (result) {
         if (result.code < 0) {
-          $.err(result.message, 5000);
+          $.err(result.message, delayLong);
         } else {
-          $.info('文件上传成功,解析中...', 60000);
+          $.info('文件上传成功,解析中...', delayLonger);
           $.tips.hideAll();
-          $.msg(result, function() {
+          $.msg(result, function () {
             if (result.code > 0) {
               importExcel.loadData(result.data, url, call);
             }
