@@ -2,7 +2,7 @@
 
 namespace Miaoxing\Excel\Controller\Admin;
 
-class Excel extends \miaoxing\plugin\BaseController
+class Excel extends \Miaoxing\Plugin\BaseController
 {
     protected $guestPages = ['admin/excel/parseToJson', 'admin/excel/uploadAndParseToJson'];
 
