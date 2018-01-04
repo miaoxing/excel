@@ -3,7 +3,7 @@
 namespace Miaoxing\Excel\Service;
 
 use ErrorException;
-use miaoxing\plugin\BaseService;
+use Miaoxing\Plugin\BaseService;
 use PHPExcel_IOFactory;
 use Wei\Logger;
 use Wei\RetTrait;
