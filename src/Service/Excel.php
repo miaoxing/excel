@@ -38,7 +38,6 @@ class Excel extends BaseService
         $data = [];
         $endRow = $maxRow + 1;
         for ($i = $startRow; $i < $endRow; ++$i) {
-
             // 获取一行的数据
             $rows = [];
             $endCol = $cols + 1;
@@ -61,15 +60,6 @@ class Excel extends BaseService
         if (empty($data)) {
             return ['code' => -3, 'message' => '表格数据为空,请根据范例填写后再提交'];
         }
-
-        // 检查是否某一个格子为空
-        /*foreach ($data as $i => $rows) {
-            foreach ($rows as $j => $cell) {
-                if (!$cell) {
-                    return $this->json(-4, sprintf('表格的第%s行%c列为空,请检查后再提交', $i + $startRow, $j + 65));
-                }
-            }
-        }*/
 
         return [
             'code' => 1,
