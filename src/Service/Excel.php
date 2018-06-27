@@ -20,7 +20,9 @@ class Excel extends BaseService
      * @param int $cols 总共有多少列
      * @param int $startRow
      * @param int $maxRow 最多包含
-     * @return mixed
+     * @return array
+     * @throws \PHPExcel_Exception
+     * @throws \PHPExcel_Reader_Exception
      */
     public function parseToArray($file, $cols, $startRow = 2, $maxRow = 1000)
     {
@@ -33,44 +35,20 @@ class Excel extends BaseService
         }
 
         $sheet = $excel->getActiveSheet();
-
-        // 逐行获取数据
-        $data = [];
-        $endRow = $maxRow + 1;
-        for ($i = $startRow; $i < $endRow; ++$i) {
-            // 获取一行的数据
-            $rows = [];
-            $endCol = $cols + 1;
-            for ($j = 1; $j < $endCol; ++$j) {
-                $rows[] = (string) $sheet->getCell($this->toLetter($j) . $i)->getValue();
-            }
-
-            // 如果当前行为空,不再获取
-            if (array_unique($rows) == ['']) {
-                break;
-            } else {
-                $data[] = $rows;
-            }
+        if ($sheet->getHighestRow() > $maxRow + 1) {
+            return $this->err(['表格不能超过%s行', $maxRow], -2);
         }
 
-        if ($i == $endRow) {
-            return ['code' => -2, 'message' => sprintf('表格不能超过%s行', $maxRow)];
+        $data = $sheet->toArray();
+        $data = array_slice($data, $startRow - 1);
+
+        if (!$data) {
+            return $this->err('表格数据为空,请根据范例填写后再提交', -3);
         }
 
-        if (empty($data)) {
-            return ['code' => -3, 'message' => '表格数据为空,请根据范例填写后再提交'];
-        }
-
-        return [
-            'code' => 1,
-            'message' => '解析表格数据成功',
+        return $this->suc([
             'total' => count($data),
             'data' => $data,
-        ];
-    }
-
-    protected function toLetter($number)
-    {
-        return strtoupper(chr($number + 96));
+        ]);
     }
 }
