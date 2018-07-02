@@ -41,6 +41,7 @@ class Excel extends BaseService
 
         $data = $sheet->toArray();
         $data = array_slice($data, $startRow - 1);
+        $data = $this->removeNullRow($data);
 
         if (!$data) {
             return $this->err('表格数据为空,请根据范例填写后再提交', -3);
@@ -50,5 +51,18 @@ class Excel extends BaseService
             'total' => count($data),
             'data' => $data,
         ]);
+    }
+
+    protected function removeNullRow($data)
+    {
+        for ($i = count($data) - 1; $i > 0; $i--) {
+            $row = array_unique($data[$i]);
+            if ($row == [null]) {
+                unset($data[$i]);
+            } else {
+                return $data;
+            }
+        }
+        return $data;
     }
 }
