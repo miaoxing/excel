@@ -14,9 +14,9 @@ class Excel extends \Miaoxing\Plugin\BaseController
             return $this->err('文件不存在');
         }
 
-        $data = wei()->excel->parseToArray($req['file'], $cols);
+        $ret = wei()->excel->parseToArray($req['file'], $cols);
 
-        return $this->response->json($data);
+        return $ret;
     }
 
     public function uploadAndParseToJsonAction($req)

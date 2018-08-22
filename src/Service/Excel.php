@@ -48,6 +48,7 @@ class Excel extends BaseService
         }
 
         return $this->suc([
+            'message' => '解析文件成功',
             'total' => count($data),
             'data' => $data,
         ]);
