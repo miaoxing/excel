@@ -37,9 +37,6 @@ define(['jquery-form'], function () {
       data: {data: data},
       success: function (result) {
         call(result);
-      },
-      error: function (result) {
-        call(result);
       }
     });
   };
