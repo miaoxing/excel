@@ -12,10 +12,14 @@ class Import extends BaseService
 {
     use RetTrait;
 
-    public function import($data, $fn)
+    public function import($data, $fn, $max = 0)
     {
         if (!$data) {
             return $this->err('没有读取到导入的数据');
+        }
+
+        if ($max && count($data) > $max) {
+            return $this->err(['一次最多导入%s条记录', $max]);
         }
 
         $rets = [];
@@ -41,6 +45,11 @@ class Import extends BaseService
             $errCount,
         ]));
 
-        return $this->suc(['rets' => $rets]);
+        return $this->suc([
+            'rets' => $rets,
+            'total' => count($data),
+            'sucCount' => $sucCount,
+            'errCount' => $errCount,
+        ]);
     }
 }
