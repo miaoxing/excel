@@ -5,11 +5,17 @@ namespace Miaoxing\Excel\Service;
 use ErrorException;
 use Miaoxing\Plugin\BaseService;
 use PHPExcel_IOFactory;
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
+use PhpOffice\PhpSpreadsheet\Cell\DataType;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Wei\Logger;
+use Wei\Response;
 use Wei\RetTrait;
 
 /**
  * @property Logger logger
+ * @property Response response
  */
 class Excel extends BaseService
 {
@@ -65,5 +71,37 @@ class Excel extends BaseService
             }
         }
         return $data;
+    }
+
+    public function export($fileName, $data)
+    {
+        $res = $this->response;
+        $res->setHeader([
+            'Content-type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'Content-Disposition' => 'attachment;filename=' . $fileName . '.xlsx',
+        ]);
+        $res->sendHeader();
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $startRow = '1';
+        $startColumn = 'A';
+
+        foreach ($data as $rowData) {
+            $currentColumn = $startColumn;
+            foreach ($rowData as $cellValue) {
+                // 大于15位数字开始变0 12位空间不足变科学计数法
+                if (is_numeric($cellValue) && strlen($cellValue) >= 12) {
+                    $sheet->setCellValueExplicit($currentColumn . $startRow, $cellValue, DataType::TYPE_STRING);
+                } else {
+                    $sheet->setCellValue($currentColumn . $startRow, $cellValue);
+                }
+                ++$currentColumn;
+            }
+            ++$startRow;
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
     }
 }
