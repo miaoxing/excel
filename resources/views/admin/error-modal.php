@@ -3,10 +3,10 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
+          <h5 class="modal-title" id="authorizeModalLabel">上传失败结果</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+            <span class="white" aria-hidden="true">&times;</span>
           </button>
-          <h4 class="modal-title" id="authorizeModalLabel">上传失败结果</h4>
         </div>
         <div class="modal-body">
           <div class="well form-well m-b">
