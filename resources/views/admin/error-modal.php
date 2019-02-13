@@ -9,7 +9,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <div class="well form-well m-b">
+          <div class="well">
             <form class="form-horizontal">
               <div class="form-group m-b-0">
                 <label class="col-md-3 control-label">总记录数：</label>
