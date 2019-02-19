@@ -11,7 +11,7 @@
         <div class="modal-body">
           <div class="well">
             <form class="form-horizontal">
-              <div class="form-group m-b-0">
+              <div class="form-group mb-0">
                 <label class="col-md-3 control-label">总记录数：</label>
 
                 <div class="col-md-1">
