@@ -1,4 +1,4 @@
-define(['jquery-form'], function () {
+define(['plugins/app/libs/jquery-form/jquery.form'], function () {
   var importExcel = {};
 
   var delayLong = 5000;
