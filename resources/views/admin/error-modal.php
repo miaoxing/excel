@@ -15,7 +15,7 @@
                 <label class="col-md-3 control-label">总记录数：</label>
 
                 <div class="col-md-1">
-                  <p class="form-control-static">
+                  <p class="form-control-plaintext">
                     <%= totalCount %>
                   </p>
                 </div>
@@ -23,7 +23,7 @@
                 <label class="col-md-3 control-label">新增记录：</label>
 
                 <div class="col-md-1">
-                  <p class="form-control-static">
+                  <p class="form-control-plaintext">
                     <%= createCount %>
                   </p>
                 </div>
@@ -31,7 +31,7 @@
                 <label class="col-md-3 control-label">更新记录：</label>
 
                 <div class="col-md-1">
-                  <p class="form-control-static">
+                  <p class="form-control-plaintext">
                     <%= updateCount %>
                   </p>
                 </div>
