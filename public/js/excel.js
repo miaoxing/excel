@@ -10,20 +10,17 @@ define(['plugins/app/libs/jquery-form/jquery.form'], function () {
     return submit.call(this, {
       dataType: 'json',
       type: 'post',
+      loading: true,
       data: {cols: cols},
       url: $.url('admin/excel/uploadAndParseToJson'),
       success: function (result) {
-        if (result.code < 0) {
-          $.err(result.message, delayLong);
-        } else {
-          $.info('文件上传成功,解析中...', delayLonger);
-          $.tips.hideAll();
-          $.msg(result, function () {
-            if (result.code > 0) {
-              importExcel.loadData(result.data, url, call);
-            }
-          });
+        if (result.code !== 1) {
+          $.alert(result.message);
+          return;
         }
+
+        $.msg(result);
+        importExcel.loadData(result.data);
       }
     });
   };
@@ -41,4 +38,3 @@ define(['plugins/app/libs/jquery-form/jquery.form'], function () {
     });
   };
 });
-
