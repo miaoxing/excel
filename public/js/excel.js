@@ -20,7 +20,7 @@ define(['plugins/app/libs/jquery-form/jquery.form'], function () {
         }
 
         $.msg(result);
-        importExcel.loadData(result.data);
+        importExcel.loadData(result.data, url, call);
       }
     });
   };
