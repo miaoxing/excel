@@ -1,9 +1,6 @@
 define(['plugins/app/libs/jquery-form/jquery.form'], function () {
   var importExcel = {};
 
-  var delayLong = 5000;
-  var delayLonger = 60000;
-
   // 上传文件到服务器
   var submit = $.fn.ajaxSubmit;
   $.fn.uploadFile = function (url, cols, call) {
