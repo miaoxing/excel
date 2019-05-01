@@ -23,10 +23,10 @@ class Excel extends \Miaoxing\Plugin\BaseController
     {
         $upload = wei()->upload;
 
-        $result = $upload([
+        $upload([
             'name' => '文件',
             'exts' => ['xls', 'xlsx'],
-            'dir' => wei()->upload->getDir() . '/files/' . date('Ymd'),
+            'dir' => wei()->file->getUploadDir(),
         ]);
         $req['file'] = $upload->getFile();
 
