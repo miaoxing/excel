@@ -29,7 +29,7 @@ define(['plugins/app/libs/jquery-form/jquery.form'], function () {
       dataType: 'json',
       url: $.url(url),
       contentType: 'application/json',
-      data: JSON.stringify(data),
+      data: JSON.stringify({data: data}),
       success: function (result) {
         call(result);
       }
